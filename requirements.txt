@@ -1,0 +1,5 @@
+Django
+crispy_bootstrap5
+django-crispy_forms
+
+

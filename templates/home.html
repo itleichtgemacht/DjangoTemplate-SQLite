@@ -1,0 +1,15 @@
+{% extends 'index.html' %} {% load static %} {% block content%}
+{% comment "Tutorial Beschreibung" %}
+    Alle Seiten sollen ja in diesem Tutorial immer die gleiche Kopf- und Fußzeile
+    enthalten. Dies wird mit dem Django tag extends bereitgestellt.
+    Im Django tag block content wird in diesem Bereich dieser Block in den content
+    Bereich der index.html Datei hineingeladen.
+    {% extends 'index.html' %}:     spezifiziert das Eltern Template, in diesem Fall unsere index.html
+    {% load static %}:              Lädt Templates Tags von anderen Librarys, hier aus der settings.py die Variable static
+    {% block endblock %}:           spezifiziert den Contentbereich. Es gibt ein Block-Anfang {% block <name> %} und Block-Ende {% endblock %}
+{% endcomment %}
+
+<h1>Home</h1>
+
+{% endblock content %}
+
