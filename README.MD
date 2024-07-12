@@ -506,6 +506,8 @@ git init
 git add README.md
 git commit -m "first commit"
 git branch -M DTSL-20240711-v01
+git branch -M DTSL-20240711-v02
+
 git remote add origin https://github.com/itleichtgemacht/DjangoTemplate-SQLite.git
 git push -u origin DTSL-20240711-v01
 
