@@ -14,7 +14,7 @@ mkdir DjangoTemplate-SQLLite
 cd DjangoTemplate-SQLLite
 [shell end]
 
-- Starten Sie den Code Editor, in meinem Fall MS Visual Code
+- Starten Sie den Code Editor, in meinem Fall Microsoft Visual Code
 [shell begin]
 code .
 [shell end]
@@ -49,7 +49,7 @@ source ./.env/bin/activate
   Mit diesem Kommando wird ein neues Verzeichnis djangotemplateproject erstellt und die notwendigen Dateien:
 
   manage.py         - hat die gleichen Funktionen wie das Befehlszeilenhilfsprogramm django-admin
-  helloproject/     - Projektverzeichnis
+    helloproject/     - Projektverzeichnis
     __init__.py     - hiermit erkennt Python, dass es ein Paket ist
     asgi.py         - Einstiegspunkt für den Webserver (wird hier nicht verwendet)
     wsgi.py         - Einstiegspunkt für den Webserver (wird hier näher erklärt mit einem Plesk Apache2)
@@ -509,7 +509,7 @@ git branch -M DTSL-20240711-v01
 git branch -M DTSL-20240711-v02
 
 git remote add origin https://github.com/itleichtgemacht/DjangoTemplate-SQLite.git
-git push -u origin DTSL-20240711-v01
+git push -u origin DTSL-20240711-v02
 
 
 
