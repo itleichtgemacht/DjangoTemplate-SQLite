@@ -480,5 +480,16 @@ Eine vollständige Dokumentation findet ihr unter : https://docs.djangoproject.c
 ## Django Upgrade How To
 Links: https://docs.djangoproject.com/en/5.0/howto/upgrade-version/
 
+# git Respository
+
+echo "# DjangoTemplate-SQLite" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M DTSL-20240711-v01
+git remote add origin https://github.com/itleichtgemacht/DjangoTemplate-SQLite.git
+git push -u origin DTSL-20240711-v01
+
+
 
 
