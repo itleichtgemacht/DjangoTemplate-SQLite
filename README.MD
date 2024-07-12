@@ -436,6 +436,46 @@ class EigeneUserCreationForm(UserCreationForm):
         self.fields['email'].widget.attrs.update({'class':'form-control'})
         self.fields['email'].label = 'Email'
         
-   
+## Benutzer anlegen und im Admin-Center anmelden
+
+Nun haben wir den Quellcode soweit fertig und wir müssen nur noch einen Benutzer anlegen. 
+
+[shell begin]
+python3 manage.py createsuperuser --username=master --email=info@it-leicht-gemacht.de 
+[shell end]
+
+Ruft man nun die http://localhost:8000/admin auf, so erhält man eine Übersicht der angelegten Tabellen.
+Wie man neu angelegte Tabellen im Admin-Center sichtbar macht, folgt in einen weiteren Kapitel.
+
+
+
+############# neues Kapitel #############
+# Django Hintergrundwissen zu dem ersten Kapitel
+## Dateistruktur und Djangoshell Befehle
+
+
+
+## Aufbau eines Django-Projektes
+### Was ist der Unterschied zwischen einem Projekt und einer App im Django
+### Ergänzende Erläuterungen zu den am häufigsten verwendeten Dateien
+#### Allgemeines
+hier sollte eine grafische Darstellung als JPG sein....
+
+
+#### settings.py
+In der settings.py werden alle Einstellungen für das Projekt und den enthaltenen App's konfiguriert.
+#### urls.py
+#### view.py
+#### module.py
+#### from.py
+#### Staticdateien
+#### Templates
+#### Bonus: wsgi.py
+
+
+
+
+
+
 
 
