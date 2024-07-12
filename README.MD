@@ -1,3 +1,10 @@
+# Intro
+Author:     Armin Hünniger
+Erstellt:   10.07.2024
+Geändert:   12.07.2024 18:15 Uhr
+     Was:   Web-Links ergänzt und Feinheiten noch bereinigt
+git:        
+
 # Installation
 ## Grundinstallation Python - Django
 - Wechseln sie in das Entwicklungsverzeichnis indem Sie Ihren sourcecode erstellen
@@ -461,18 +468,30 @@ hier sollte eine grafische Darstellung als JPG sein....
 
 #### settings.py
 In der settings.py werden alle Einstellungen für das Projekt und den enthaltenen App's konfiguriert.
-Eine vollständige Dokumentation findet ihr unter : https://docs.djangoproject.com/en/5.0/ref/settings/
+Eine vollständige Dokumentation findet ihr unter: https://docs.djangoproject.com/en/5.0/ref/settings/
 
 #### urls.py
+Eine vollständige Dokumentation findet ihr unter: https://docs.djangoproject.com/en/5.0/ref/urls/
 
 #### view.py
-#### module.py
-#### from.py
+Eine vollständige Dokumentation findet ihr unter: https://docs.djangoproject.com/en/5.0/ref/class-based-views/base/
+
+#### models.py
+Eine vollständige Dokumentation findet ihr unter: https://docs.djangoproject.com/en/5.0/ref/models/
+
+#### froms.py
+Eine vollständige Dokumentation findet ihr unter: https://docs.djangoproject.com/en/5.0/ref/forms/
+
 #### Staticdateien
+Eine vollständige Dokumentation findet ihr unter: https://docs.djangoproject.com/en/5.0/howto/static-files/
+
 #### Templates
+Eine vollständige Dokumentation findet ihr unter: https://docs.djangoproject.com/en/5.0/ref/templates/
+
 #### Bonus: wsgi.py
-
-
+Eine vollständige Dokumentation findet ihr unter:
+https://docs.djangoproject.com/en/5.0/howto/deployment/wsgi/
+https://docs.djangoproject.com/en/5.0/howto/deployment/wsgi/modwsgi/
 
 
 
