@@ -24,7 +24,7 @@ def loginSeite(request):
 
         if benutzer is not None:            # ist ein Benutzer ermittelt worden, so wird
             login(request, benutzer)        # dieser eingeloggt und
-            return redirect('post_list')    # die Beiträge (Post) angezeigt
+            return redirect('test')    # die Beiträge (Post) angezeigt
         else:
             messages.error(request, "Benutzername oder Passwort nicht korrekt.")
 
@@ -33,7 +33,7 @@ def loginSeite(request):
 def logoutBenutzer(request):
     logout(request)
     messages.info(request, "Logged out successfully!")
-    return redirect('home')
+    return redirect('index')
 
 def regBenutzer(request):
     seite = 'reg'
@@ -52,7 +52,7 @@ def regBenutzer(request):
            username = form.cleaned_data.get('benutzer')
            messages.success(request=f"Neuer Benutzer erstellt: {username}")
            login(request, benutzer)
-           return redirect('home')
+           return redirect('index')
         else:
             messages.error(request, "Fehlerhafte Eingabe! Bitte prüfe deinen Benutzernamen oder das Passwort!")
 

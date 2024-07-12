@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,27 +23,39 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-*vo^)$wkj#s1x)dhfy*l#x&4x2rq0eh+^*e59xb83)gl_brrdo'
 
+# ### AH
+# Links: https://docs.djangoproject.com/en/5.0/ref/settings/#debug
+# Diese Konfiguration muss für die Praxis entsprechend geändert werden
+# ###
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# ### AH 
+# Links: https://docs.djangoproject.com/en/5.0/ref/settings/#allowed-hosts
+# Diese Konfiguration muss für die Praxis entsprechend geändert werden
+# ###
 ALLOWED_HOSTS = []
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    # ### AH Standard Django Frameworks
     'django.contrib.admin',        # Admin-Webseite /admin
     'django.contrib.auth',         # Authentifizeirungssystem
     'django.contrib.contenttypes', # Framework für Inhaltstypen
     'django.contrib.sessions',     # Sessionverwaltung
     'django.contrib.messages',     # Framework für Messaging
     'django.contrib.staticfiles',  # Framework zum Verwalten statischer Dateien (siehe auch weiter unten)
-    # ### AH
-    # Selbstentwickelten Apps ...
-    # ###
+
+    # ### AH Selbstentwickelten Apps ...
     'hello_world.apps.HelloWorldConfig',   
+
+    # ### importierte Django- / Drittanbieter Frameworks
+
 ]
 
+# ### AH Links: https://docs.djangoproject.com/en/5.0/ref/settings/#middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -53,8 +66,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# AH Links: https://docs.djangoproject.com/en/5.0/ref/settings/#root-urlconf
 ROOT_URLCONF = 'djangotemplateproject.urls'
 
+# AH Links: https://docs.djangoproject.com/en/5.0/ref/settings/#templates
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -73,6 +88,7 @@ TEMPLATES = [
     },
 ]
 
+# AH Links: https://docs.djangoproject.com/en/5.0/ref/settings/#wsgi-application
 WSGI_APPLICATION = 'djangotemplateproject.wsgi.application'
 
 
@@ -85,6 +101,11 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# Default primary key field type
+# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Password validation
@@ -111,26 +132,71 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
-
+# ### AH
+# Hier werden die Zeitzone /Timezone konfiguriert
+# Siehe Links:
+#   https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+#   https://docs.djangoproject.com/en/5.0/ref/settings/#std-setting-TIME_ZONE
+# ###
+TIME_ZONE = 'Europe/Berlin'
 USE_I18N = True
-
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
-
-STATIC_URL = 'static/'
-
 # ### AH
-# Pfad definieren wo static Dateien wie z. B. Bilder, css zu finden sind
+# Konfiguration der statischen Dateien
+# Siehe Links:
+#   https://docs.djangoproject.com/en/5.0/ref/settings/#static-files
 # ###
+STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    BASE_DIR / "static"
+    BASE_DIR / "static" # AH: Pfad definieren wo static Dateien wie z. B. Bilder, css zu finden sind
 ]
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
+# ++++++ AH
+# ENDE ENDE ENDE ENDE END END END END 
+# ++++++
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Create a LOGGING dictionary
+LOGGING = {
+    # Use v1 of the logging config schema
+    'version': 1,
+    # Continue to use existing loggers
+    'disable_existing_loggers': False,
+    # Create a log handler that prints logs to the terminal
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+        "file": {
+            "class": "logging.FileHandler",
+            "filename": "general.log",
+            "level": "DEBUG",
+        },
+    },
+    # Define the root logger's settings
+    'root': {
+        'handlers': ['console', 'file'],
+        'level': 'DEBUG',
+    },
+    # Define the django log module's settings
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'file'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+            'propagate': False,
+        },
+    },
+    "formatters": {
+        "verbose": {
+            "format": "{name} {levelname} {asctime} {module} {process:d} {thread:d} {message}",
+            "style": "{",
+        },
+        "simple": {
+            "format": "{levelname} {message}",
+            "style": "{",
+        },
+    },    
+}

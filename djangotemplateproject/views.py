@@ -10,3 +10,6 @@ def index(request):
 
 def impressum(request):
     return render(request, 'impressum.html')
+
+def test(request):
+    return render(request, 'test.html')

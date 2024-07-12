@@ -276,6 +276,7 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),      
     path('', views.impressum, name='impressum'),      
+    path('test', views.test, name='test'),      
     path('helloworld', include('hello_world.urls')),    
     path('login', include('login_reg.urls')),
 
@@ -309,7 +310,7 @@ def loginSeite(request):
 
         if benutzer is not None:            # ist ein Benutzer ermittelt worden, so wird
             login(request, benutzer)        # dieser eingeloggt und
-            return redirect('post_list')    # die Beiträge (Post) angezeigt
+            return redirect('test')    # die Beiträge (Post) angezeigt
         else:
             messages.error(request, "Benutzername oder Passwort nicht korrekt.")
 
@@ -330,10 +331,6 @@ def regBenutzer(request):
            benutzer = form.save(commit=False)
            benutzer.save()
 
-           #kunde = Staff(name=request.POST['username'],email=request.POST['email'], benutzer=benutzer)
-           #kunde.save()
-           #bestellung = Bestellung(kunde=kunde)
-           #bestellung.save()
            username = form.cleaned_data.get('benutzer')
            messages.success(request=f"Neuer Benutzer erstellt: {username}")
            login(request, benutzer)
@@ -464,7 +461,10 @@ hier sollte eine grafische Darstellung als JPG sein....
 
 #### settings.py
 In der settings.py werden alle Einstellungen für das Projekt und den enthaltenen App's konfiguriert.
+Eine vollständige Dokumentation findet ihr unter : https://docs.djangoproject.com/en/5.0/ref/settings/
+
 #### urls.py
+
 #### view.py
 #### module.py
 #### from.py
@@ -476,6 +476,9 @@ In der settings.py werden alle Einstellungen für das Projekt und den enthaltene
 
 
 
+# Hintergrundinformationen
+## Django Upgrade How To
+Links: https://docs.djangoproject.com/en/5.0/howto/upgrade-version/
 
 
 
