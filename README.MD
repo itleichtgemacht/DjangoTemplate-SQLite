@@ -3,7 +3,7 @@ Author:     Armin Hünniger
 Erstellt:   10.07.2024
 Geändert:   12.07.2024 18:15 Uhr
      Was:   Web-Links ergänzt und Feinheiten noch bereinigt
-git:        
+git:        DTSL-20240711-v01
 
 # Installation
 ## Grundinstallation Python - Django
