@@ -8,6 +8,16 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
+
+
+What Python version can I use with Django?
+Django version	Python versions
+3.2	             3.6, 3.7, 3.8, 3.9, 3.10 (added in 3.2.9)
+4.0	             3.8, 3.9, 3.10
+4.1	             3.8, 3.9, 3.10, 3.11 (added in 4.1.3)
+4.2	             3.8, 3.9, 3.10, 3.11, 3.12 (added in 4.2.8)
+5.0	             3.10, 3.11, 3.12
+
 """
 
 from pathlib import Path
@@ -147,19 +157,21 @@ USE_TZ = True
 # Konfiguration der statischen Dateien
 # Siehe Links:
 #   https://docs.djangoproject.com/en/5.0/ref/settings/#static-files
+#   https://docs.djangoproject.com/en/5.0/howto/static-files/
+#   https://docs.djangoproject.com/en/5.0/howto/static-files/deployment/
 # ###
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static" # AH: Pfad definieren wo static Dateien wie z. B. Bilder, css zu finden sind
 ]
 
-# ++++++ AH
-# ENDE ENDE ENDE ENDE END END END END 
-# ++++++
 
-
-
-# Create a LOGGING dictionary
+# +++ AH
+#  Das LOGGING dictionary
+# Links: 
+#   https://docs.djangoproject.com/en/5.0/howto/logging/
+#   https://www.crowdstrike.com/guides/python-logging/logging-with-django/
+# ###
 LOGGING = {
     # Use v1 of the logging config schema
     'version': 1,
@@ -200,3 +212,10 @@ LOGGING = {
         },
     },    
 }
+
+# ++++++ AH
+# ENDE ENDE ENDE ENDE END END END END 
+# ++++++
+
+
+
