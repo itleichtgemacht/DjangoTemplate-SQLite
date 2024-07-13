@@ -50,6 +50,7 @@ source ./.env/bin/activate
 
   Mit diesem Kommando wird ein neues Verzeichnis djangotemplateproject erstellt und die notwendigen Dateien:
 
+```Shell
   manage.py         - hat die gleichen Funktionen wie das Befehlszeilenhilfsprogramm django-admin
     helloproject/   - Projektverzeichnis
     __init__.py     - hiermit erkennt Python, dass es ein Paket ist
@@ -57,6 +58,7 @@ source ./.env/bin/activate
     wsgi.py         - Einstiegspunkt für den Webserver (wird hier näher erklärt mit einem Plesk Apache2)
     settings.py     - Enthält alle Einstellungen Projektübergreifend
     urls.py         - Enthält die Web-URLs die von einem Webbrowser aufgerufen werden können
+```
   
   Nun kann die Webseite, sprich das erste Djangoprojekt auch schon gestartet werden. Zum jetzigen Zeitpunkt werden noch Fehler ausgegeben, hierzu später mehr.
 
@@ -264,9 +266,10 @@ Probiere es aus. Es sollten unterschiedliche Texte, wie in der View definiert er
 # Erstellung eine Login und Registrierungs App
 Die App soll den Namen "login_reg" lauten.
 
-[shell begin]
+```Shell
 python3 manage.py startapp login_reg
-[shell end]
+```
+
 
 Für die Darstellung der Webseite erweitern wir noch die Funktion um Templates (BootStrap-html-Dateien) und legen auch einen statischen Ordner für Bilder, css, js Dateien usw. an
 
@@ -477,9 +480,10 @@ class EigeneUserCreationForm(UserCreationForm):
 
 Nun haben wir den Quellcode soweit fertig und wir müssen nur noch einen Benutzer anlegen. 
 
-[shell begin]
+```Shell
 python3 manage.py createsuperuser --username=master --email=info@it-leicht-gemacht.de 
-[shell end]
+```
+
 
 Ruft man nun die http://localhost:8000/admin auf, so erhält man eine Übersicht der angelegten Tabellen.
 Wie man neu angelegte Tabellen im Admin-Center sichtbar macht, folgt in einen weiteren Kapitel.
