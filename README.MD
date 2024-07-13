@@ -108,6 +108,7 @@ source ./.env/bin/activate
   
   Da standardmäßig seitens Django eine SQLLite Datenbank bereits schon konfiguriert ist, wird diese im Projektordner auch erstellt:
 
+```Shell
     manage.py         - hat die gleichen Funktionen wie das Befehlszeilenhilfsprogramm django-admin
     db.sqlite3        - SQLite 3 Datenbank (hier werden alle Tabellen gespeichert)
     helloproject/     - Projektverzeichnis
@@ -116,15 +117,17 @@ source ./.env/bin/activate
       wsgi.py         - Einstiegspunkt für den Webserver (wird hier näher erklärt mit einem Plesk Apache2)
       settings.py     - Enthält alle Einstellungen Projektübergreifend
       urls.py         - Enthält die Web-URLs die von einem Webbrowser aufgerufen werden können
+```
 
   Starten wir nun unseren Entwicklungs-Web-Server, so sollten keine Fehlermeldungen mehr erscheinen:
 
-  [shell begin]
+  ```Shell
   python3 manage.py runserver
-  [shell end]
+  ```
 
   Ausgabe sollte in etwa so im Terminal aussehen:
 
+```Shell
     Watching for file changes with StatReloader
     Performing system checks...
 
@@ -133,15 +136,16 @@ source ./.env/bin/activate
     Django version 5.0.7, using settings 'djangotemplateproject.settings'
     Starting development server at http://127.0.0.1:8000/
     Quit the server with CONTROL-C.
+```
+
 
 ## Erstellung einer Django App im Django Projekt
   wie erwähnt kann ein Django Projekt mehrere Apps beinhalten, z. B. für eine Loginseite für einen Mitgliederbereich, eine App die sich um einen Blog kümmert, eine App für einen Shop und vieles mehr.
 
   Mit diesem Befehl erstellen wir uns eine hello_world-App:
 
-  [shell begin]
+```Shell
   python3 manage.py startapp hello_world
-  [shell end]
 
   hello_world/
     __init__.py
@@ -152,8 +156,11 @@ source ./.env/bin/activate
     models.py           # hier wird der Inhalt der Datenbank definiert
     tests.py
     views.py            # hier die Funktionen erstellt, wenn eine Webbrowser URL aufgerufen.
+```
 
   Diese neuerstellte App muss nun noch im Projekt eingebunden werden. Hierzu muss die Liste INSTALLED_APPS in der Datei settings.py um die Klasse aus der apps.py ergänzt werden:
+
+```Python
 
   INSTALLED_APPS = [
     'django.contrib.admin',        # Admin-Webseite /admin
@@ -167,6 +174,7 @@ source ./.env/bin/activate
     # ###
     'hello_world.apps.HelloWorldConfig',   
   ]
+```
 
   Soweit so gut, aber wie kann ich nun die App über den Webbrowser aufrufen, bzw. erreichen. Hierzu mehr im folgenden Abschnitt
 
