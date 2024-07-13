@@ -9,10 +9,10 @@ git:        DTSL-20240711-v02
 ## Grundinstallation Python - Django
 - Wechseln sie in das Entwicklungsverzeichnis indem Sie Ihren sourcecode erstellen
 - Erstellen Sie ein neues Verzeichnis z. B. DjangoTemplate-SQLLite
-[code]
+```
 mkdir DjangoTemplate-SQLLite
 cd DjangoTemplate-SQLLite
-[code]
+```
 
 - Starten Sie den Code Editor, in meinem Fall Microsoft Visual Code
 [shell begin]
