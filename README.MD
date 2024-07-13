@@ -197,6 +197,7 @@ Unser Beispiel enthält eine Minimalversion
 ## Routen - urls.py 
 Erstellen wir nun eine Route um die hello_world App aufzurufen. Hierzu erstelle folgende Datei mit Inhalt im App Verzeichnis:
 
+```Python
 hello_world/urls.py
 from django.urls import path
 from . import views
@@ -204,12 +205,14 @@ from . import views
 urlpatterns = [
     path('helloworld', views.hello, name='hello'),    #  https://localhost:8000/helloworld wird mit der View views.hello verbunden
 ]
+```
 
 Die urlpattens ist eine Pyhton-Tupel, in dem die Ansichten und URLs verbunden werden.
 Details folgen in einem separaten Abschnitt
 
 Diese urls.py muss nun noch dem Projekt bekanntgegeben werden, dass es diese App gibt. Hierzu muss Sie in der sogenannten Urlconf im Projektverzeichnis konfiguriert werden.
 
+```Python
 urls.py (aus dem Projektverzeichnis)
 from django.contrib import admin
 from django.urls import include, path
@@ -220,6 +223,7 @@ urlpatterns = [
     path('helloworld', include('hello_world.urls')),
     path('admin/', admin.site.urls),
 ]
+```
 
 
 
@@ -227,16 +231,19 @@ urlpatterns = [
 ## Ansichten - views.py
 Appverzeichnis (hello_world): Wir rufen in der urls.py die view.hello auf. Diese wird in der views.py im App Verzeichnis definiert.
 
+```Python
 hello_world/views.py
 from django.shortcuts import render
 from django.http import HttpResponse
 
 def hello(request):
     return HttpResponse("Hello, world! Die App hello_world wurde aufgefrufen.")
+```
 
 
 Projektverzeichnis: Wir rufen in der urls.py die view.hello auf. Diese wird in der views.py im App Verzeichnis definiert.
 
+```Python
 views.py
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -244,6 +251,7 @@ from django.http import HttpResponse
 def index(request):
     return HttpResponse("Projekt index wurde aufgerufen!")
 
+```
 
 Nun muss noch der Webserver einmal neugestartet werden. Fertig die erste minimalisierte Webseite wurde nun erstellt.
 
@@ -277,6 +285,7 @@ Nicht im App- oder Projektverzeichnis anlegen!
 
 ## urls.py 
 ### Appverzeichnis
+```Python
 from django.urls import path
 from . import views
 
@@ -285,9 +294,12 @@ urlpatterns = [
     path('logout/', views.logoutBenutzer, name ="logout"),
     path('reg/', views.regBenutzer, name ="reg"),
 ]
+```
 
 ### Projektverzeichnis
 urls.py (aus dem Projektverzeichnis)
+
+```Python
 from django.contrib import admin
 from django.urls import include, path
 from . import views
@@ -301,11 +313,13 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
 ]
+```
 
 
 
 ## views.py (App-Verzeichnis)
 
+```Python
 from django.http import HttpRequest                 # beinhaltet die Http Request Typen, wie z. B. Post, Get, ...
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
@@ -359,9 +373,11 @@ def regBenutzer(request):
 
     ctx = {'form': form, 'seite': seite}
     return render(request, 'login.html', ctx)
+```
 
 ## views.py (Projekt-Verzeichnis)
 
+```Python
 from django.shortcuts import render
 
 def index(request):
@@ -371,6 +387,7 @@ def index(request):
 
 def impressum(request):
     return render(request, 'impressum.html')
+```
 
 
 ## Templates
@@ -381,6 +398,7 @@ def impressum(request):
 
 ## settings.py
 
+```Python
   INSTALLED_APPS = [
     'django.contrib.admin',        # Admin-Webseite /admin
     'django.contrib.auth',         # Authentifizeirungssystem
@@ -420,6 +438,7 @@ TEMPLATES = [
         },
     },
 ]
+```
 
 
 ## requirements.txt
@@ -429,6 +448,7 @@ django-crispy_forms
 
 ## forms.py (App-Verzeichnis)
 
+```Python
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -451,7 +471,8 @@ class EigeneUserCreationForm(UserCreationForm):
         self.fields['password2'].label = 'Passwort wiederholen'
         self.fields['email'].widget.attrs.update({'class':'form-control'})
         self.fields['email'].label = 'Email'
-        
+ ```
+       
 ## Benutzer anlegen und im Admin-Center anmelden
 
 Nun haben wir den Quellcode soweit fertig und wir müssen nur noch einen Benutzer anlegen. 
@@ -513,6 +534,7 @@ Links: https://docs.djangoproject.com/en/5.0/howto/upgrade-version/
 
 # git Respository
 
+```Shell
 echo "# DjangoTemplate-SQLite" >> README.md
 git init
 git add README.md
@@ -522,6 +544,7 @@ git branch -M DTSL-20240711-v02
 
 git remote add origin https://github.com/itleichtgemacht/DjangoTemplate-SQLite.git
 git push -u origin DTSL-20240711-v02
+```
 
 
 
