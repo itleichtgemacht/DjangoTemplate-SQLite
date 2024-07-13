@@ -16,41 +16,42 @@ cd DjangoTemplate-SQLLite
 ```
 
 - Starten Sie den Code Editor, in meinem Fall Microsoft Visual Code
-[shell begin]
+```Shell
 code .
-[shell end]
+```
+
 
 - Starten sie im Visual Code über <Terminal - Neues Terminal> ein Termininalfenster
 
 - Erstellen Sie eine neue virtuelle Umgebung. Somit haben Sie jedes Django Projekt unter kontrolle, wenn sich einmal die Python Version ändern sollte.
 
-[shell begin]
+```Shell
 python3 -m venv .env
 source ./.env/bin/activate
-[shell end]
+```
 
 - Die Verwaltung von Python-Paketen kann über eine einfache Textdatei geschehen, die requirements.txt. Erstellen
   Sie die im Projektverzeichnis und schreiben Sie als erstes das Framework Django hinein und drücken Sie Return. Danach installieren wir die Pakete mit pip
   <requirements.txt>
   Django
 
-  [shell begin]
+  ```Shell
   pip install -r requirements.text
-  [shell end]
+  ```
 
   ## Erstellung eines Django Projektes
   Ein Django Projekt ist die Projektstruktur, die wiederum mehrere Django Anwendungen haben kann.
 
   Hierfür nehmen wir uns die mitgelieferte Django-Shell Befehle zur Hand, in diesem Fall django-admin 
 
-  [shell begin]
+```Shell
   django-admin startproject djangotemplateproject .
-  [shell end]
+```
 
   Mit diesem Kommando wird ein neues Verzeichnis djangotemplateproject erstellt und die notwendigen Dateien:
 
   manage.py         - hat die gleichen Funktionen wie das Befehlszeilenhilfsprogramm django-admin
-    helloproject/     - Projektverzeichnis
+    helloproject/   - Projektverzeichnis
     __init__.py     - hiermit erkennt Python, dass es ein Paket ist
     asgi.py         - Einstiegspunkt für den Webserver (wird hier nicht verwendet)
     wsgi.py         - Einstiegspunkt für den Webserver (wird hier näher erklärt mit einem Plesk Apache2)
@@ -59,9 +60,9 @@ source ./.env/bin/activate
   
   Nun kann die Webseite, sprich das erste Djangoprojekt auch schon gestartet werden. Zum jetzigen Zeitpunkt werden noch Fehler ausgegeben, hierzu später mehr.
 
-  [shell begin]
+  ```Shell
   python3 manage.py runserver
-  [shell end]
+  ```
 
   Erreichbar ist unser erstes Blanko Django Projekt unter: http://localhost:8000/ oder http://127.0.0.1:8000
 
@@ -71,15 +72,16 @@ source ./.env/bin/activate
 
   Was nun noch fehlt ist die SQLLite Datenbank. Auch hier unterstützt uns das Framework. Standardmäßig bringt Django eine Datenbank Administrationsseite mit. Die dazugehörige Datenbank wird mit folgenden Befehlen erstellt:
 
-  [shell begin]
+  ```Shell
   python3 manage.py makemigrations
   python3 manage.py migrate
-  [shell end]
+```
 
   Im Terminal wird nun angezeigt, dass Änderungen an der Datenbank durchgeführt werden müssen. Dies ist logisch, da wir ein neues Projekt aufgesetzt haben und noch keine Datenbank haben:
 
   Ausgabe im Termin sollte etwa so sein:
 
+```Shell
   Operations to perform:
   Apply all migrations: admin, auth, contenttypes, sessions
 
@@ -102,6 +104,7 @@ source ./.env/bin/activate
   Applying auth.0011_update_proxy_permissions... OK
   Applying auth.0012_alter_user_first_name_max_length... OK
   Applying sessions.0001_initial... OK
+```
   
   Da standardmäßig seitens Django eine SQLLite Datenbank bereits schon konfiguriert ist, wird diese im Projektordner auch erstellt:
 
