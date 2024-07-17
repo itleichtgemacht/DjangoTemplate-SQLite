@@ -1,7 +1,9 @@
 # Intro
+```
 Author:     Armin Hünniger
 Erstellt:   10.07.2024
 git:        DTSL-20240711-v02
+```
 
 # Intro
 In dieser Version widmen wir uns den Templates im Django. Nur in sehr wenigen Ausnahmefällen kann auf die responsive Entwicklung verzichtet werden.
@@ -64,6 +66,7 @@ Da ich diese Themenreihe noch fortführe und aus diesem Django Projekt ein PWA A
 ```
 # Grundlegendes zu Django Templates
 ## Zwecke und Vorteile von Django Templates
+```
 Zweck	                                    Beschreibung
 Trennung von Logik und Präsentation	      Django Templates ermöglichen eine klare Trennung zwischen der Geschäftlogik (im Python-Code) und der Präsentationslogik (im HTML-Code).        Dies fördert eine saubere, wartbare und übersichtliche Codebasis.
 Wiederverwendbarkeit	                    Templates können für verschiedene Teile der Webseite wiederverwendet werden. Zum Beispiel können Header,
@@ -76,12 +79,14 @@ Template-Vererbung	                      Templates in Django unterstützen Verer
                                           von anderen Templates erweitert wird. Dies fördert Konsistenz und reduziert Redundanz.
 Sicherheitsfunktionen	                    Django Templates bieten Schutz gegen viele Sicherheitsprobleme, wie z.B. Cross-Site Scripting (XSS), indem 
                                           sie automatisch HTML-Entitäten escapen.
+```
 
 Django Templates sind unerlässlich für die effiziente und strukturierte Entwicklung von Webanwendungen. Sie ermöglichen die Trennung von HTML und
 Python-Code, fördern die Wiederverwendbarkeit von HTML-Strukturen und unterstützen die Einbindung dynamischer Inhalte, wodurch die Erstellung und 
 Wartung von Webseiten deutlich vereinfacht wird.
 
 ## Wichtige Django Template-Tags
+```
 Tag	              Beschreibung
 {% block %}	      Definiert einen Block, der in einem erweiterten Template überschrieben werden kann.
 {% endblock %}	  Beendet einen Block.
@@ -100,8 +105,10 @@ Tag	              Beschreibung
 {% endwith %}	    Beendet den {% with %}-Kontext.
 {% comment %}	    Fügt einen Kommentar hinzu, der im gerenderten HTML nicht sichtbar ist.
 {% endcomment %}	Beendet einen Kommentar.
+```
 
 ## Wichtige Django Template-Filter
+```
 Filter	          Beschreibung
 date	            Formatiert ein Datum oder eine Datums-/Zeitangabe.
 escape	          Wandelt Zeichen so um, dass sie sicher in HTML verwendet werden können.
@@ -113,6 +120,7 @@ truncatechars	    Kürzt eine Zeichenkette auf die angegebene Anzahl von Zeichen
 urlize	          Wandelt URLs in einem Text in anklickbare Links um.
 default	          Gibt einen Standardwert zurück, wenn die Variable leer oder nicht definiert ist.
 join	            Verbindet eine Liste von Zeichenketten mit einem angegebenen Trennzeichen.
+```
 
 Django Templates bieten eine leistungsstarke und flexible Möglichkeit, dynamische Inhalte zu rendern, indem sie eine Vielzahl 
 von Tags und Filtern zur Verfügung stellen.
@@ -145,6 +153,7 @@ von Tags und Filtern zur Verfügung stellen.
 
 ```
 
+```
 {% extends 'base.html' %}:                 Das Template erweitert base.html.
 {% load static %}:                         Lädt die statische Dateien-Tag-Bibliothek.
 {% block title %}Startseite{% endblock %}: Überschreibt den Titel-Block in der Basisvorlage.
@@ -152,6 +161,7 @@ von Tags und Filtern zur Verfügung stellen.
 {{ "Django TEMPLATES"|lower }}:            Wandelt den Text in Kleinbuchstaben um.
 {% if user.is_authenticated %}...{% else %}...{% endif %}: Bedingte Anzeige basierend auf der Authentifizierung des Benutzers.
 {% for item in item_list %}...{% endfor %}:                Schleife durch item_list.
+```
 
 Django Templates bieten eine leistungsstarke und flexible Möglichkeit, dynamische Inhalte zu rendern, indem sie eine Vielzahl 
 von Tags und Filtern zur Verfügung stellen.
