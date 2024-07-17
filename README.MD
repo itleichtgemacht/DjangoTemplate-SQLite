@@ -1,513 +1,178 @@
 # Intro
+```
 Author:     Armin Hünniger
 Erstellt:   10.07.2024
-Geändert:   12.07.2024 18:15 Uhr
-     Was:   Web-Links ergänzt und Feinheiten noch bereinigt
-git:        DTSL-20240711-v01
+git:        DTSL-20240711-v02
+```
 
-# Installation
-## Grundinstallation Python - Django
-- Wechseln sie in das Entwicklungsverzeichnis indem Sie Ihren sourcecode erstellen
-- Erstellen Sie ein neues Verzeichnis z. B. DjangoTemplate-SQLLite
-[shell begin]
-mkdir DjangoTemplate-SQLLite
-cd DjangoTemplate-SQLLite
-[shell end]
+# Intro
+In dieser Version widmen wir uns den Templates im Django. Nur in sehr wenigen Ausnahmefällen kann auf die responsive Entwicklung verzichtet werden.
+Daher schauten wir uns die Zusammenarbeit zwischen Templates und BootStrap 5.x genauer an.
 
-- Starten Sie den Code Editor, in meinem Fall MS Visual Code
-[shell begin]
-code .
-[shell end]
+# Notwendige Grundbefehele aus dem vorherigen Tutorial v1
 
-- Starten sie im Visual Code über <Terminal - Neues Terminal> ein Termininalfenster
-
-- Erstellen Sie eine neue virtuelle Umgebung. Somit haben Sie jedes Django Projekt unter kontrolle, wenn sich einmal die Python Version ändern sollte.
-
-[shell begin]
+```Shell
 python3 -m venv .env
 source ./.env/bin/activate
-[shell end]
 
-- Die Verwaltung von Python-Paketen kann über eine einfache Textdatei geschehen, die requirements.txt. Erstellen
-  Sie die im Projektverzeichnis und schreiben Sie als erstes das Framework Django hinein und drücken Sie Return. Danach installieren wir die Pakete mit pip
-  <requirements.txt>
-  Django
+python3 manage.py runserver
+python3 manage.py shell
+python3 manage.py createsuperuser
 
-  [shell begin]
-  pip install -r requirements.text
-  [shell end]
+pip install -r requirements.text
 
-  ## Erstellung eines Django Projektes
-  Ein Django Projekt ist die Projektstruktur, die wiederum mehrere Django Anwendungen haben kann.
+python manage.py shell
+- und in der Shell das Passwort zurücksetzen wenn z. B. Vergessen
+my_user = DjangoTemplate-SQLite.objects.filter(email="info@itleichtgemacht.de").first()
+my_user.set_password("NewPassword")
+my_user.save()
 
-  Hierfür nehmen wir uns die mitgelieferte Django-Shell Befehle zur Hand, in diesem Fall django-admin 
 
-  [shell begin]
-  django-admin startproject djangotemplateproject .
-  [shell end]
+```
 
-  Mit diesem Kommando wird ein neues Verzeichnis djangotemplateproject erstellt und die notwendigen Dateien:
+## git Respository
 
-  manage.py         - hat die gleichen Funktionen wie das Befehlszeilenhilfsprogramm django-admin
-  helloproject/     - Projektverzeichnis
-    __init__.py     - hiermit erkennt Python, dass es ein Paket ist
-    asgi.py         - Einstiegspunkt für den Webserver (wird hier nicht verwendet)
-    wsgi.py         - Einstiegspunkt für den Webserver (wird hier näher erklärt mit einem Plesk Apache2)
-    settings.py     - Enthält alle Einstellungen Projektübergreifend
-    urls.py         - Enthält die Web-URLs die von einem Webbrowser aufgerufen werden können
-  
-  Nun kann die Webseite, sprich das erste Djangoprojekt auch schon gestartet werden. Zum jetzigen Zeitpunkt werden noch Fehler ausgegeben, hierzu später mehr.
-
-  [shell begin]
-  python3 manage.py runserver
-  [shell end]
-
-  Erreichbar ist unser erstes Blanko Django Projekt unter: http://localhost:8000/ oder http://127.0.0.1:8000
-
-  Fehlermeldung nach dem Start mit runserver:
-  --> You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
-  Run 'python manage.py migrate' to apply them.
-
-  Was nun noch fehlt ist die SQLLite Datenbank. Auch hier unterstützt uns das Framework. Standardmäßig bringt Django eine Datenbank Administrationsseite mit. Die dazugehörige Datenbank wird mit folgenden Befehlen erstellt:
-
-  [shell begin]
-  python3 manage.py makemigrations
-  python3 manage.py migrate
-  [shell end]
-
-  Im Terminal wird nun angezeigt, dass Änderungen an der Datenbank durchgeführt werden müssen. Dies ist logisch, da wir ein neues Projekt aufgesetzt haben und noch keine Datenbank haben:
-
-  Ausgabe im Termin sollte etwa so sein:
-
-  Operations to perform:
-  Apply all migrations: admin, auth, contenttypes, sessions
-
-  Running migrations:
-  Applying contenttypes.0001_initial... OK
-  Applying auth.0001_initial... OK
-  Applying admin.0001_initial... OK
-  Applying admin.0002_logentry_remove_auto_add... OK
-  Applying admin.0003_logentry_add_action_flag_choices... OK
-  Applying contenttypes.0002_remove_content_type_name... OK
-  Applying auth.0002_alter_permission_name_max_length... OK
-  Applying auth.0003_alter_user_email_max_length... OK
-  Applying auth.0004_alter_user_username_opts... OK
-  Applying auth.0005_alter_user_last_login_null... OK
-  Applying auth.0006_require_contenttypes_0002... OK
-  Applying auth.0007_alter_validators_add_error_messages... OK
-  Applying auth.0008_alter_user_username_max_length... OK
-  Applying auth.0009_alter_user_last_name_max_length... OK
-  Applying auth.0010_alter_group_name_max_length... OK
-  Applying auth.0011_update_proxy_permissions... OK
-  Applying auth.0012_alter_user_first_name_max_length... OK
-  Applying sessions.0001_initial... OK
-  
-  Da standardmäßig seitens Django eine SQLLite Datenbank bereits schon konfiguriert ist, wird diese im Projektordner auch erstellt:
-
-    manage.py         - hat die gleichen Funktionen wie das Befehlszeilenhilfsprogramm django-admin
-    db.sqlite3        - SQLite 3 Datenbank (hier werden alle Tabellen gespeichert)
-    helloproject/     - Projektverzeichnis
-      __init__.py     - hiermit erkennt Python, dass es ein Paket ist
-      asgi.py         - Einstiegspunkt für den Webserver (wird hier nicht verwendet)
-      wsgi.py         - Einstiegspunkt für den Webserver (wird hier näher erklärt mit einem Plesk Apache2)
-      settings.py     - Enthält alle Einstellungen Projektübergreifend
-      urls.py         - Enthält die Web-URLs die von einem Webbrowser aufgerufen werden können
-
-  Starten wir nun unseren Entwicklungs-Web-Server, so sollten keine Fehlermeldungen mehr erscheinen:
-
-  [shell begin]
-  python3 manage.py runserver
-  [shell end]
-
-  Ausgabe sollte in etwa so im Terminal aussehen:
-
-    Watching for file changes with StatReloader
-    Performing system checks...
-
-    System check identified no issues (0 silenced).
-    July 11, 2024 - 09:09:13
-    Django version 5.0.7, using settings 'djangotemplateproject.settings'
-    Starting development server at http://127.0.0.1:8000/
-    Quit the server with CONTROL-C.
-
-## Erstellung einer Django App im Django Projekt
-  wie erwähnt kann ein Django Projekt mehrere Apps beinhalten, z. B. für eine Loginseite für einen Mitgliederbereich, eine App die sich um einen Blog kümmert, eine App für einen Shop und vieles mehr.
-
-  Mit diesem Befehl erstellen wir uns eine hello_world-App:
-
-  [shell begin]
-  python3 manage.py startapp hello_world
-  [shell end]
-
-  hello_world/
-    __init__.py
-    admin.py
-    apps.py
-    migrations/
-        __init__.py
-    models.py           # hier wird der Inhalt der Datenbank definiert
-    tests.py
-    views.py            # hier die Funktionen erstellt, wenn eine Webbrowser URL aufgerufen.
-
-  Diese neuerstellte App muss nun noch im Projekt eingebunden werden. Hierzu muss die Liste INSTALLED_APPS in der Datei settings.py um die Klasse aus der apps.py ergänzt werden:
-
-  INSTALLED_APPS = [
-    'django.contrib.admin',        # Admin-Webseite /admin
-    'django.contrib.auth',         # Authentifizeirungssystem
-    'django.contrib.contenttypes', # Framework für Inhaltstypen
-    'django.contrib.sessions',     # Sessionverwaltung
-    'django.contrib.messages',     # Framework für Messaging
-    'django.contrib.staticfiles',  # Framework zum Verwalten statischer Dateien (siehe auch weiter unten)
-    # ### AH
-    # Selbstentwickelten Apps ...
-    # ###
-    'hello_world.apps.HelloWorldConfig',   
-  ]
-
-  Soweit so gut, aber wie kann ich nun die App über den Webbrowser aufrufen, bzw. erreichen. Hierzu mehr im folgenden Abschnitt
-
-## Kurzer Überblick wie Django arbeitet
-### Models - models.py
-In der models.py werden die Datenbankinhalte definiert. Diese Datei ist grundlegend damit mit "python3 manage.py makemigrations bzw. migrate," eine Datenbank erstellt, als auch geändert werden kann.
-Django bringt von sich aus eine umfassende Definitions- und Funktionssammlung mit. 
-Weiteres folgt daher in einen separaten Abschnitt
-
-### Routen - urls.py
-In der urls.py werden die Web-URLs definiert und welche View / Ansicht angezeigt werden soll. Im Projektverzeichnis, als auch im App-Verzeichnis können urls.py Dateien enthalten sein.
-Details folgen in einen separaten Abschnitt
-Unser Beispiel enthält eine Minimalversion
-
-### Views / Ansichten - views.py
-In der views.py Datei werden die aus der urls.py Datei entsprechenden Ansichten und der dazugehörige Source-Code verwaltet.
-Details folgen in einen separaten Abschnitt
-Unser Beispiel enthält eine Minimalversion
-
-## Routen - urls.py 
-Erstellen wir nun eine Route um die hello_world App aufzurufen. Hierzu erstelle folgende Datei mit Inhalt im App Verzeichnis:
-
-hello_world/urls.py
-from django.urls import path
-from . import views
-
-urlpatterns = [
-    path('helloworld', views.hello, name='hello'),    #  https://localhost:8000/helloworld wird mit der View views.hello verbunden
-]
-
-Die urlpattens ist eine Pyhton-Tupel, in dem die Ansichten und URLs verbunden werden.
-Details folgen in einem separaten Abschnitt
-
-Diese urls.py muss nun noch dem Projekt bekanntgegeben werden, dass es diese App gibt. Hierzu muss Sie in der sogenannten Urlconf im Projektverzeichnis konfiguriert werden.
-
-urls.py (aus dem Projektverzeichnis)
-from django.contrib import admin
-from django.urls import include, path
-from . import views
-
-urlpatterns = [
-    path('', views.index, name='index'),      
-    path('helloworld', include('hello_world.urls')),
-    path('admin/', admin.site.urls),
-]
-
-
-
-
-## Ansichten - views.py
-Appverzeichnis (hello_world): Wir rufen in der urls.py die view.hello auf. Diese wird in der views.py im App Verzeichnis definiert.
-
-hello_world/views.py
-from django.shortcuts import render
-from django.http import HttpResponse
-
-def hello(request):
-    return HttpResponse("Hello, world! Die App hello_world wurde aufgefrufen.")
-
-
-Projektverzeichnis: Wir rufen in der urls.py die view.hello auf. Diese wird in der views.py im App Verzeichnis definiert.
-
-views.py
-from django.shortcuts import render
-from django.http import HttpResponse
-
-def index(request):
-    return HttpResponse("Projekt index wurde aufgerufen!")
-
-
-Nun muss noch der Webserver einmal neugestartet werden. Fertig die erste minimalisierte Webseite wurde nun erstellt.
-
-Folgende Web-URLs haben wir nun erstellt:
-localhost:8000/
-localhost:8000/hello_world
-
-Probiere es aus. Es sollten unterschiedliche Texte, wie in der View definiert erscheinen.
-
-# Erstellung eine Login und Registrierungs App
-Die App soll den Namen "login_reg" lauten.
-
-[shell begin]
-python3 manage.py startapp login_reg
-[shell end]
-
-Für die Darstellung der Webseite erweitern wir noch die Funktion um Templates (BootStrap-html-Dateien) und legen auch einen statischen Ordner für Bilder, css, js Dateien usw. an
-
-mkdir templates
-mkdir static
-
-DjangoTemplate-SQLLite/
-  temlates
-  static
-
-Nicht im App- oder Projektverzeichnis anlegen!
-
-
-## models.py
-
-
-## urls.py 
-### Appverzeichnis
-from django.urls import path
-from . import views
-
-urlpatterns = [
-    path('login/', views.loginSeite, name ="login"),
-    path('logout/', views.logoutBenutzer, name ="logout"),
-    path('reg/', views.regBenutzer, name ="reg"),
-]
-
-### Projektverzeichnis
-urls.py (aus dem Projektverzeichnis)
-from django.contrib import admin
-from django.urls import include, path
-from . import views
-
-urlpatterns = [
-    path('', views.index, name='index'),      
-    path('', views.impressum, name='impressum'),      
-    path('test', views.test, name='test'),      
-    path('helloworld', include('hello_world.urls')),    
-    path('login', include('login_reg.urls')),
-
-    path('admin/', admin.site.urls),
-]
-
-
-
-## views.py (App-Verzeichnis)
-
-from django.http import HttpRequest                 # beinhaltet die Http Request Typen, wie z. B. Post, Get, ...
-from django.shortcuts import get_object_or_404
-from django.shortcuts import redirect
-from django.shortcuts import render                 # gibt die gerenderten Daten z. B. zur Ansicht in einer HTML Seite
-from django.contrib import messages                 # Stellt Informationen schöner dar und enthält vordefinierte Templates, wie z. B. für Wichtig, Info, usw. zur Verfügung
-from .models import *
-
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login, logout
-from .forms import EigeneUserCreationForm
-
-
-
-def loginSeite(request):
-    seite = 'login'
-    if request.method == 'POST':
-        benutzername = request.POST['benutzername']
-        passwort = request.POST['passwort']
-
-        benutzer = authenticate(request, username=benutzername, password=passwort)  # Stimmen die Logindaten, so wird der Benutzer zurückgegeben.
-
-        if benutzer is not None:            # ist ein Benutzer ermittelt worden, so wird
-            login(request, benutzer)        # dieser eingeloggt und
-            return redirect('test')    # die Beiträge (Post) angezeigt
-        else:
-            messages.error(request, "Benutzername oder Passwort nicht korrekt.")
-
-    return render(request, 'login_reg/login.html', {'seite': seite})
-
-def logoutBenutzer(request):
-    logout(request)
-    messages.info(request, "Logged out successfully!")
-    return redirect('home')
-
-def regBenutzer(request):
-    seite = 'reg'
-    form = EigeneUserCreationForm
-
-    if request.method == 'POST':
-        form = EigeneUserCreationForm(request.POST)
-        if form.is_valid():
-           benutzer = form.save(commit=False)
-           benutzer.save()
-
-           username = form.cleaned_data.get('benutzer')
-           messages.success(request=f"Neuer Benutzer erstellt: {username}")
-           login(request, benutzer)
-           return redirect('home')
-        else:
-            messages.error(request, "Fehlerhafte Eingabe! Bitte prüfe deinen Benutzernamen oder das Passwort!")
-
-    ctx = {'form': form, 'seite': seite}
-    return render(request, 'login.html', ctx)
-
-## views.py (Projekt-Verzeichnis)
-
-from django.shortcuts import render
-
-def index(request):
-    # home.html aus dem Template Verzeichnis laden.
-    return render(request, 'home.html')
-
-
-def impressum(request):
-    return render(request, 'impressum.html')
-
-
-## Templates
-
-
-
-
-
-## settings.py
-
-  INSTALLED_APPS = [
-    'django.contrib.admin',        # Admin-Webseite /admin
-    'django.contrib.auth',         # Authentifizeirungssystem
-    'django.contrib.contenttypes', # Framework für Inhaltstypen
-    'django.contrib.sessions',     # Sessionverwaltung
-    'django.contrib.messages',     # Framework für Messaging
-    'django.contrib.staticfiles',  # Framework zum Verwalten statischer Dateien (siehe auch weiter unten)
-    # ### AH
-    # Selbstentwickelten Apps ...
-    # ###
-    'hello_world.apps.HelloWorldConfig',   
-    'login_reg.apps.LoginRegConfig',   
-     # BootStrap5 bekanntgeben für die HtML Templates
-    "crispy_bootstrap5",           # Framework um HTML Dateien zu designen (Desktop, Mobile, ... )
-    "crispy_forms",                # Framework zur Verwaltung von Formularen zur Eingabe der Daten 
-
-]
-
-
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
-CRISPY_TEMPLATE_PACK = "bootstrap5"
-
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # 'DIRS': [],
-        'DIRS': [BASE_DIR / 'templates'], 
-        
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]
-
-
-## requirements.txt
-Django
-crispy_bootstrap5
-django-crispy_forms
-
-## forms.py (App-Verzeichnis)
-
-from django import forms
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
-
-class EigeneUserCreationForm(UserCreationForm):
-    email = forms.EmailField(required=True)
-
-    class Meta:
-        model = User
-        fields = ['username', 'password1', 'password2', 'email']
-    
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs.update({'class':'form-control'})
-        self.fields['username'].label = 'Benutzername'
-        self.fields['password1'].widget.attrs.update({'class':'form-control'})
-        self.fields['password1'].label = 'Passwort'
-        self.fields['password2'].widget.attrs.update({'class':'form-control'})
-        self.fields['password2'].label = 'Passwort wiederholen'
-        self.fields['email'].widget.attrs.update({'class':'form-control'})
-        self.fields['email'].label = 'Email'
-        
-## Benutzer anlegen und im Admin-Center anmelden
-
-Nun haben wir den Quellcode soweit fertig und wir müssen nur noch einen Benutzer anlegen. 
-
-[shell begin]
-python3 manage.py createsuperuser --username=master --email=info@it-leicht-gemacht.de 
-[shell end]
-
-Ruft man nun die http://localhost:8000/admin auf, so erhält man eine Übersicht der angelegten Tabellen.
-Wie man neu angelegte Tabellen im Admin-Center sichtbar macht, folgt in einen weiteren Kapitel.
-
-
-
-############# neues Kapitel #############
-# Django Hintergrundwissen zu dem ersten Kapitel
-## Dateistruktur und Djangoshell Befehle
-
-
-
-## Aufbau eines Django-Projektes
-### Was ist der Unterschied zwischen einem Projekt und einer App im Django
-### Ergänzende Erläuterungen zu den am häufigsten verwendeten Dateien
-#### Allgemeines
-hier sollte eine grafische Darstellung als JPG sein....
-
-
-#### settings.py
-In der settings.py werden alle Einstellungen für das Projekt und den enthaltenen App's konfiguriert.
-Eine vollständige Dokumentation findet ihr unter: https://docs.djangoproject.com/en/5.0/ref/settings/
-
-#### urls.py
-Eine vollständige Dokumentation findet ihr unter: https://docs.djangoproject.com/en/5.0/ref/urls/
-
-#### view.py
-Eine vollständige Dokumentation findet ihr unter: https://docs.djangoproject.com/en/5.0/ref/class-based-views/base/
-
-#### models.py
-Eine vollständige Dokumentation findet ihr unter: https://docs.djangoproject.com/en/5.0/ref/models/
-
-#### froms.py
-Eine vollständige Dokumentation findet ihr unter: https://docs.djangoproject.com/en/5.0/ref/forms/
-
-#### Staticdateien
-Eine vollständige Dokumentation findet ihr unter: https://docs.djangoproject.com/en/5.0/howto/static-files/
-
-#### Templates
-Eine vollständige Dokumentation findet ihr unter: https://docs.djangoproject.com/en/5.0/ref/templates/
-
-#### Bonus: wsgi.py
-Eine vollständige Dokumentation findet ihr unter:
-https://docs.djangoproject.com/en/5.0/howto/deployment/wsgi/
-https://docs.djangoproject.com/en/5.0/howto/deployment/wsgi/modwsgi/
-
-
-
-# Hintergrundinformationen
-## Django Upgrade How To
-Links: https://docs.djangoproject.com/en/5.0/howto/upgrade-version/
-
-# git Respository
-
+```Shell
 echo "# DjangoTemplate-SQLite" >> README.md
 git init
-git add README.md
-git commit -m "first commit"
-git branch -M DTSL-20240711-v01
+git branch -M DTSL-20240711-v02
 git remote add origin https://github.com/itleichtgemacht/DjangoTemplate-SQLite.git
-git push -u origin DTSL-20240711-v01
+git push -u origin DTSL-20240711-v02
+```
+
+# Installation
+## Python
+Hier ist keine Installation notwendig. Da BootStrap ein JavaScript Framework ist.
+
+## index.html
+Hier wird der Weg über CDN gezeigt. Im Projekt werden wir das BootStrap vom lokalen Static Verzeichnis laden.
+Da ich diese Themenreihe noch fortführe und aus diesem Django Projekt ein PWA Anwendung machen möchte, ist dies notwendig.
+
+```HTML
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    ...
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+```
+# Grundlegendes zu Django Templates
+## Zwecke und Vorteile von Django Templates
+```
+Zweck	                                    Beschreibung
+Trennung von Logik und Präsentation	      Django Templates ermöglichen eine klare Trennung zwischen der Geschäftlogik (im Python-Code) und der Präsentationslogik (im HTML-Code).        Dies fördert eine saubere, wartbare und übersichtliche Codebasis.
+Wiederverwendbarkeit	                    Templates können für verschiedene Teile der Webseite wiederverwendet werden. Zum Beispiel können Header,
+                                          Footer und Navigationselemente als separate Templates erstellt und in anderen Templates eingebunden werden.
+Erleichterung der Entwicklung	            Entwickler und Designer können gleichzeitig an einem Projekt arbeiten. Designer können sich auf das HTML und 
+                                          CSS konzentrieren, während Entwickler die Logik in Python schreiben.
+Dynamische Inhalte	                      Mit Django Templates können dynamische Inhalte einfach dargestellt werden. Daten, die vom Backend kommen, 
+                                          können direkt in den HTML-Code eingebettet werden.
+Template-Vererbung	                      Templates in Django unterstützen Vererbung, was bedeutet, dass man eine Basisvorlage erstellen kann, die 
+                                          von anderen Templates erweitert wird. Dies fördert Konsistenz und reduziert Redundanz.
+Sicherheitsfunktionen	                    Django Templates bieten Schutz gegen viele Sicherheitsprobleme, wie z.B. Cross-Site Scripting (XSS), indem 
+                                          sie automatisch HTML-Entitäten escapen.
+```
+
+Django Templates sind unerlässlich für die effiziente und strukturierte Entwicklung von Webanwendungen. Sie ermöglichen die Trennung von HTML und
+Python-Code, fördern die Wiederverwendbarkeit von HTML-Strukturen und unterstützen die Einbindung dynamischer Inhalte, wodurch die Erstellung und 
+Wartung von Webseiten deutlich vereinfacht wird.
+
+## Wichtige Django Template-Tags
+```
+Tag	              Beschreibung
+{% block %}	      Definiert einen Block, der in einem erweiterten Template überschrieben werden kann.
+{% endblock %}	  Beendet einen Block.
+{% extends %}	    Erweitert eine andere Template-Datei.
+{% include %}	    Fügt den Inhalt einer anderen Template-Datei ein.
+{% load %}	      Lädt eine benutzerdefinierte Template-Tag-Bibliothek.
+{% static %}	    Gibt den URL-Pfad zu einer statischen Datei zurück.
+{% url %}	        Erzeugt eine URL für die angegebene Ansichtsfunktion.
+{% for %}	        Startet eine Schleife über eine Liste von Objekten.
+{% endfor %}	    Beendet eine Schleife.
+{% if %}	        Startet eine Bedingungsprüfung.
+{% elif %}	      Fügt eine Bedingung innerhalb einer {% if %}-Prüfung hinzu.
+{% else %}	      Fügt einen "ansonsten"-Block in eine {% if %}-Prüfung ein.
+{% endif %}	      Beendet eine Bedingungsprüfung.
+{% with %}	      Setzt eine oder mehrere Variablen in einem bestimmten Kontext.
+{% endwith %}	    Beendet den {% with %}-Kontext.
+{% comment %}	    Fügt einen Kommentar hinzu, der im gerenderten HTML nicht sichtbar ist.
+{% endcomment %}	Beendet einen Kommentar.
+```
+
+## Wichtige Django Template-Filter
+```
+Filter	          Beschreibung
+date	            Formatiert ein Datum oder eine Datums-/Zeitangabe.
+escape	          Wandelt Zeichen so um, dass sie sicher in HTML verwendet werden können.
+length	          Gibt die Länge einer Liste oder eines Strings zurück.
+lower	            Wandelt eine Zeichenkette in Kleinbuchstaben um.
+upper	            Wandelt eine Zeichenkette in Großbuchstaben um.
+safe	            Markiert eine Zeichenkette als sicher, sodass sie nicht escapet wird.
+truncatechars	    Kürzt eine Zeichenkette auf die angegebene Anzahl von Zeichen.
+urlize	          Wandelt URLs in einem Text in anklickbare Links um.
+default	          Gibt einen Standardwert zurück, wenn die Variable leer oder nicht definiert ist.
+join	            Verbindet eine Liste von Zeichenketten mit einem angegebenen Trennzeichen.
+```
+
+Django Templates bieten eine leistungsstarke und flexible Möglichkeit, dynamische Inhalte zu rendern, indem sie eine Vielzahl 
+von Tags und Filtern zur Verfügung stellen.
+
+## Erläuterungen mit einfachen Beispiel
+
+```Python
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Startseite{% endblock %}
+
+{% block content %}
+    <h2>Willkommen auf der Startseite!</h2>
+    <p>Dies ist der Inhalt der Startseite.</p>
+    <p>Heute ist: {{ today|date:"D d M Y" }}</p>
+    <p>In Kleinbuchstaben: {{ "Django TEMPLATES"|lower }}</p>
+
+    {% if user.is_authenticated %}
+        <p>Willkommen, {{ user.username }}!</p>
+    {% else %}
+        <p>Bitte <a href="{% url 'login' %}">melden Sie sich an</a>.</p>
+    {% endif %}
+
+    {% for item in item_list %}
+        <p>{{ item.name }} - {{ item.description|truncatechars:30 }}</p>
+    {% endfor %}
+{% endblock %}
+
+```
+
+```
+{% extends 'base.html' %}:                 Das Template erweitert base.html.
+{% load static %}:                         Lädt die statische Dateien-Tag-Bibliothek.
+{% block title %}Startseite{% endblock %}: Überschreibt den Titel-Block in der Basisvorlage.
+{{ today|date:"D d M Y" }}:                Formatiert das today Datum.
+{{ "Django TEMPLATES"|lower }}:            Wandelt den Text in Kleinbuchstaben um.
+{% if user.is_authenticated %}...{% else %}...{% endif %}: Bedingte Anzeige basierend auf der Authentifizierung des Benutzers.
+{% for item in item_list %}...{% endfor %}:                Schleife durch item_list.
+```
+
+Django Templates bieten eine leistungsstarke und flexible Möglichkeit, dynamische Inhalte zu rendern, indem sie eine Vielzahl 
+von Tags und Filtern zur Verfügung stellen.
+
+# DjangoTemplate-SQLite for free Armin Hünniger
+Die Version 1 war für den Einstieg ein nicht so perfekter HTML Code, da es hier überwiegend um ein lauffähiges Django Projekt ging.
+In der Version 2 wurden daher die Templates nocheinmal überarbeitet und einige Bugs, die mir im Testlauf aufgefallen sind, bereinigt. 
+Weiter wurde der HTML Code und auch die BootStrap's Tag's in der HTML Datei näher erläutert. In der README.md gehe ich daher nicht 
+näher ein.
+
+
 
 
 
