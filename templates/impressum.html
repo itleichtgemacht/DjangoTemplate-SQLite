@@ -7,7 +7,6 @@
     {% extends 'index.html' %}:     spezifiziert das Eltern Template, in diesem Fall unsere index.html
     {% load static %}:              Lädt Templates Tags von anderen Librarys, hier aus der settings.py die Variable static
     {% block endblock %}:           spezifiziert den Contentbereich. Es gibt ein Block-Anfang {% block <name> %} und Block-Ende {% endblock %}
-{% endcomment %}
 
 
 
@@ -20,12 +19,15 @@
                 <a href="{% url 'post_list' %}" class="btn-blog">Zurück zur Liste</a>
             </div>
         {% endif %}
-        <h2 class="home-h2 d-flex justify-content-center">{{ post.title }}</h2>
+        <h2 class="home-h2 d-flex justify-content-center">Impressum</h2>
         <article class="post-content">{{ post.content|safe }}</article>
         <hr />
 
     </article>
     {% endfor %}
+{% endcomment %}
+<h2 class="home-h1 d-flex justify-content-center">Impressum</h2>
+
 
 {% endblock content %}
 
